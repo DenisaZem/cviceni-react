@@ -1,4 +1,5 @@
 import './ukazatel-uspechu.css';
+import { useState } from 'react';
 
 // Zadání 1: Použijte prop `barva` ve style atributu.
 // Zadání 2: Přidejte komponentě číselný stav od nuly do sta, který bude reprezentovat postup.
@@ -6,18 +7,25 @@ import './ukazatel-uspechu.css';
 // Zadání 4. Nastavte prvku `ukazatel-uspechu__postup` šířku podle stavové proměnné.
 
 const UkazatelPokroku = ({ barva }) => {
+
+  const [postup, setPostup] = useState(0)
+
+  const zvyseni =()=>{
+    setPostup(Math.min(postup+10,100))
+  }
+
   return (
     <div className="ukazatel-uspechu">
       <div className="ukazatel-uspechu__ramecek">
         <div
           className="ukazatel-uspechu__postup"
           style={{
-            width: '40%',
-            backgroundColor: 'red',
+            width: `${postup}%`,
+            backgroundColor: `#${barva}`,
           }}
         ></div>
       </div>
-      <button>postoupit o 10 %</button>
+      <button onClick={zvyseni}>postoupit o 10 %</button>
     </div>
   );
 };
